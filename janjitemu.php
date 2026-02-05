@@ -58,7 +58,7 @@
         <div class="container">
             <a class="navbar-brand fw-bold fs-3" href="#">Donasi Darah</a>
             <div class="ms-auto d-flex align-items-center">
-                <a href="#cari-lokasi" class="nav-link text-danger fw-semibold me-4">Janji Temu</a>
+                <a href="dashboard.php" class="nav-link text-danger fw-semibold me-4">Dashboard</a>
                 <button class="btn btn-light border me-2 px-4">Sign in</button>
                 <button class="btn btn-dark px-4">Register</button>
             </div>

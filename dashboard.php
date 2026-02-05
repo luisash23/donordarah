@@ -35,7 +35,7 @@
         <div class="container">
             <a class="navbar-brand fw-bold fs-4" href="#">Donasi Darah</a>
             <div class="ms-auto d-flex align-items-center">
-                <a href="#" class="nav-link text-danger me-3">Janji Temu</a>
+                <a href="janjitemu.php" class="nav-link text-danger me-3">Janji Temu</a>
                 <button class="btn btn-outline-secondary me-2">Sign in</button>
                 <button class="btn btn-dark">Register</button>
             </div>
