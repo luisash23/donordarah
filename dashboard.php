@@ -34,10 +34,10 @@
     <nav class="navbar navbar-expand-lg navbar-light border-bottom">
         <div class="container">
             <a class="navbar-brand fw-bold fs-4" href="#">Donasi Darah</a>
-            <div class="ms-auto d-flex align-items-center">
+            <div class="ms-auto d-flex align-items-center d-flex gap-2">
                 <a href="janjitemu.php" class="nav-link text-danger me-3">Janji Temu</a>
-                <button class="btn btn-outline-secondary me-2">Sign in</button>
-                <button class="btn btn-dark">Register</button>
+                <a href="login.php" class="btn btn-outline-secondary">Sign in</a>
+                <a href="register.php" class="btn btn-dark">Register</a>
             </div>
         </div>
     </nav>

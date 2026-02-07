@@ -74,7 +74,7 @@
                     <div class="card location-card mb-4 shadow-sm">
                         <div class="row g-4 align-items-center">
                             <div class="col-md-4">
-                                <img src="https://fastly.picsum.photos/id/1023/400/300.jpg?hmac=W0WqR5zYq1t6p8zK9p-M7G-E-O-n-7-0-0-0" class="img-placeholder" alt="UDD PMI">
+                                <img src="assets/donor.jpg" class="img-placeholder" alt="UDD PMI">
                             </div>
                             <div class="col-md-8">
                                 <h4 class="fw-bold mb-1">Unit Donor Darah (UDD) PMI</h4>
@@ -87,7 +87,7 @@
                                     <span>Jl. Palang Merah Indonesia No. 1, Sidodadi Samarinda Ulu</span>
                                 </div>
                                 <div class="info-item">
-                                    <i class="bi bi-telephone text-danger"></i>
+                                    <i class="i i-telephone text-danger"></i>
                                     <span>+62 8890-4938-3129</span>
                                 </div>
                                 <div class="info-item mb-4">
@@ -96,7 +96,7 @@
                                 </div>
 
                                 <button class="btn btn-red px-4 py-2 fw-bold">
-                                    <i class="bi bi-calendar-check me-2"></i> Buat Janji Temu
+                                    <a  href="formjanji.php" class="btn btn-red px-4 py-2 fw-bold">Buat Janji Temu</a>
                                 </button>
                             </div>
                         </div>
