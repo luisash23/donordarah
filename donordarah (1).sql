@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 05, 2026 at 03:40 AM
+-- Generation Time: Feb 07, 2026 at 12:23 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -24,37 +24,45 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pendonor`
+-- Table structure for table `users`
 --
 
-CREATE TABLE `pendonor` (
-  `id` int NOT NULL,
-  `nama` varchar(100) NOT NULL,
-  `golongan_darah` varchar(2) DEFAULT NULL,
-  `berat_badan` int DEFAULT NULL,
-  `usia` int DEFAULT NULL,
-  `tanggal_daftar` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE `users` (
+  `idUser` int NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `gmail` varchar(255) NOT NULL,
+  `tinggiBadan` int NOT NULL,
+  `beratBadan` int NOT NULL,
+  `golonganDarah` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`idUser`, `username`, `gmail`, `tinggiBadan`, `beratBadan`, `golonganDarah`, `password`) VALUES
+(1, 'luis', 'luis.spt90@gmail.com', 170, 110, 'A', 'luis2009');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `pendonor`
+-- Indexes for table `users`
 --
-ALTER TABLE `pendonor`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`idUser`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `pendonor`
+-- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE `pendonor`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+ALTER TABLE `users`
+  MODIFY `idUser` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
