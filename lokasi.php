@@ -69,7 +69,7 @@ session_start();
             <a href="dashboard.php" class="nav-link text-danger me-3">Dashboard</a>
                 
                 <?php if (isset($_SESSION['login'])): ?>
-                    <a href="profil-user.php" class="btn btn-outline-secondary me-2">Profil Saya</a>
+                    <a href="profil_user.php" class="btn btn-outline-secondary me-2">Profil Saya</a>
                     <a href="logout.php" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin Logout?');">Logout</a>
                 <?php else: ?>
                      <a href="login.php" class="btn btn-outline-secondary">Sign in</a>

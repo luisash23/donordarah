@@ -109,7 +109,7 @@
 
         <div class="action-footer">
             <a href="lokasi.php" class="btn btn-light btn-cancel">Batal</a>
-            <button class="btn btn-confirm">Konfirmasi Janji Temu</button>
+            <a href="konfirjanjitemu.php" class="btn btn-confirm">Konfirmasi Janji Temu</a>
         </div>
     </div>
 
