@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+=======
+<?php
+session_start();
+$_SESSION['login'] = true; 
+?>
+<!DOCTYPE html>
+<html lang="id">
+>>>>>>> 47aefeb (inisialisasi project donor darah)
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -60,12 +69,22 @@
             border-color: #dee2e6;
         }
         .btn-masuk {
+<<<<<<< HEAD
             background-color: #ff0000;
             border: none;
             padding: 12px;
             font-weight: bold;
             border-radius: 8px;
             margin-top: 10px;
+=======
+          background-color: #c81000; 
+          color: white;
+          padding: 10px 20px;
+          display: block; 
+          text-align: center;
+          text-decoration: none;
+          border-radius: 5px;
+>>>>>>> 47aefeb (inisialisasi project donor darah)
         }
         .btn-masuk:hover {
             background-color: #cc0000;
@@ -114,7 +133,11 @@
                 </div>
 
                 <div class="d-grid mb-4">
+<<<<<<< HEAD
                     <button type="submit" class="btn btn-danger btn-masuk text-white">Masuk</button>
+=======
+                    <a href="dashboard.php" class="btn btn-masuk ">Masuk</a>
+>>>>>>> 47aefeb (inisialisasi project donor darah)
                 </div>
 
                 <p class="text-muted small">
