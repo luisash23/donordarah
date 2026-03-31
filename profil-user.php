@@ -1,10 +1,34 @@
 <?php
 session_start();
-// Pastikan user sudah login
 if (!isset($_SESSION['login'])) {
     header("Location: login.php");
     exit;
 }
+
+include 'config/app.php';
+$idUser = isset($_SESSION['idUser']) ? intval($_SESSION['idUser']) : 0;
+$user = null;
+
+if ($idUser > 0) {
+    $result = mysqli_query($db, "SELECT * FROM users WHERE idUser = '$idUser'");
+    if ($result && mysqli_num_rows($result) > 0) {
+        $user = mysqli_fetch_assoc($result);
+    }
+}
+
+if (!$user) {
+    $user = [
+        'username' => '-',
+        'gmail' => '-',
+        'nohp' => '-',
+        'golonganDarah' => '-' 
+    ];
+}
+
+$nama = $user['username'] ?? '-';
+$email = $user['gmail'] ?? '-';
+$nohp = $user['nohp'] ?? '-';
+$goldar = $user['golonganDarah'] ?? '-';
 ?>
 
 <!DOCTYPE html>
@@ -37,19 +61,19 @@ if (!isset($_SESSION['login'])) {
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="text-muted small">Nama Lengkap</label>
-                        <div class="fw-bold">Budi Santoso</div>
+                        <div class="fw-bold"><?= htmlspecialchars($nama) ?></div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="text-muted small">Email</label>
-                        <div class="fw-bold">budi@email.com</div>
+                        <div class="fw-bold"><?= htmlspecialchars($email) ?></div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="text-muted small">Golongan Darah</label>
-                        <div class="fw-bold badge bg-danger">O+</div>
+                        <div class="fw-bold badge bg-danger"><?= htmlspecialchars($goldar) ?></div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="text-muted small">Nomor Telepon</label>
-                        <div class="fw-bold">081234567890</div>
+                        <div class="fw-bold"><?= htmlspecialchars($nohp) ?></div>
                     </div>
                 </div>
 
@@ -61,6 +85,7 @@ if (!isset($_SESSION['login'])) {
                     <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#editModal">
                         Edit Profil
                     </button>
+                    <a href="dashboard.php" class="btn btn-dark">Back</a>
                     <a href="logout.php" class="btn btn-dark">Logout</a>
                 </div>
             </div>
@@ -80,19 +105,19 @@ if (!isset($_SESSION['login'])) {
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label class="form-label">Nama Lengkap</label>
-                            <input type="text" class="form-control" name="nama" value="Budi Santoso">
+                            <input type="text" class="form-control" name="nama" value="<?= htmlspecialchars($nama) ?>">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Nomor Telepon</label>
-                            <input type="tel" class="form-control" name="telepon" value="081234567890">
+                            <input type="tel" class="form-control" name="nohp" value="<?= htmlspecialchars($nohp) ?>">
                         </div>
                         <div class="col-md-12">
                             <label class="form-label">Golongan Darah</label>
                             <select class="form-select" name="goldar">
-                                <option value="O+" selected>O+</option>
-                                <option value="A">A</option>
-                                <option value="B">B</option>
-                                <option value="AB">AB</option>
+                                <option value="O+" <?= $goldar === 'O+' ? 'selected' : '' ?>>O+</option>
+                                <option value="A" <?= $goldar === 'A' ? 'selected' : '' ?>>A</option>
+                                <option value="B" <?= $goldar === 'B' ? 'selected' : '' ?>>B</option>
+                                <option value="AB" <?= $goldar === 'AB' ? 'selected' : '' ?>>AB</option>
                             </select>
                         </div>
                     </div>

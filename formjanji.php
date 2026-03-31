@@ -17,12 +17,12 @@
 
         .card-custom { border: none; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 20px; }
         
-        /* Informasi Pendonor Section */
+        /* infor pendonor section */
         .info-pendonor { background-color: #eef5ff; border: 1px solid #cce0ff; padding: 20px; border-radius: 12px; }
         .info-label { color: #0d6efd; font-weight: 600; font-size: 0.85rem; }
         .info-value { color: #333; font-size: 0.9rem; margin-bottom: 10px; }
 
-        /* Time Slot Buttons */
+        /* time slot buttons */
         .time-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; margin-bottom: 25px; }
         .btn-time { 
             border: 1px solid #dee2e6; 
@@ -38,7 +38,7 @@
         .date-title { font-weight: 600; color: #333; margin-bottom: 15px; font-size: 1rem; }
         .section-header-icon { color: #d63031; margin-right: 8px; }
 
-        /* Footer Buttons */
+        /* footer buttons */
         .action-footer { display: flex; justify-content: flex-end; gap: 15px; margin-top: 30px; }
         .btn-cancel { border: 1px solid #dee2e6; padding: 10px 30px; border-radius: 8px; font-weight: 500; }
         .btn-confirm { background-color: #ff0000; color: white; border: none; padding: 10px 30px; border-radius: 8px; font-weight: 600; }
@@ -117,7 +117,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        // Simple script untuk simulasi klik pada jam
+        // simulasi klik pada jam
         document.querySelectorAll('.btn-time').forEach(button => {
             button.addEventListener('click', function() {
                 document.querySelectorAll('.btn-time').forEach(b => b.classList.remove('active'));
@@ -126,4 +126,4 @@
         });
     </script>
 </body>
-</html>
+</html>=

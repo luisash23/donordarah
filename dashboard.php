@@ -1,9 +1,8 @@
-<<<<<<< HEAD
-=======
 <?php
 session_start();
+include 'config/app.php';
 ?>
->>>>>>> 47aefeb (inisialisasi project donor darah)
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -23,11 +22,10 @@ session_start();
         .hero-section { padding: 60px 0; }
         .stat-box h2 { color: var(--primary-red); font-weight: bold; }
         .how-it-works { padding: 50px 0; background-color: #fff; }
-<<<<<<< HEAD
-=======
+
         html { scroll-behavior: smooth; }
             .btn-red { background-color: #c81000; }
->>>>>>> 47aefeb (inisialisasi project donor darah)
+
         .icon-circle {
             width: 60px; height: 60px;
             background: #f8f9fa;
@@ -42,16 +40,6 @@ session_start();
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light border-bottom">
-        <div class="container">
-            <a class="navbar-brand fw-bold fs-4" href="#">Donasi Darah</a>
-            <div class="ms-auto d-flex align-items-center d-flex gap-2">
-                <a href="janjitemu.php" class="nav-link text-danger me-3">Janji Temu</a>
-                <a href="login.php" class="btn btn-outline-secondary">Sign in</a>
-                <a href="register.php" class="btn btn-dark">Register</a>
-            </div>
-        </div>
-    </nav>
 <script>
     document.querySelector('a[href="#pencarian-lokasi"]').addEventListener('click', function(e) {
         setTimeout(function() {
@@ -66,36 +54,28 @@ session_start();
         <a class="navbar-brand fw-bold fs-4" href="#">Donasi Darah</a>
        <div class="ms-auto d-flex align-items-center gap-2">
         <a href="janjitemu.php" class="nav-link text-danger me-3">Janji Temu</a>
-    
-    <?php if (isset($_SESSION['login'])): ?>
+
+    <?php if (isset($_SESSION['idUser'])): ?>
         <a href="profil-user.php" class="btn btn-outline-secondary">Profil Saya</a>
         <a href="logout.php" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin logout?');">Logout</a>
+    
     <?php else: ?>
         <a href="login.php" class="btn btn-outline-secondary">Sign in</a>
         <a href="register.php" class="btn btn-dark">Register</a>
     <?php endif; ?>
 </div>
-    </div>
-</nav>
+    </nav>
 
     <div class="container hero-section">
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <h1 class="display-5 fw-bold text-red mb-3">Donorkan Darah, Selamatkan Jiwa</h1>
                 <p class="lead mb-4 text-muted">Setiap donasi dapat menyelamatkan hingga tiga nyawa. Temukan pusat donor terdekat dan jadwalkan janji temu Anda hari ini.</p>
-<<<<<<< HEAD
-                
-                <div class="input-group mb-5 shadow-sm" style="max-width: 500px;">
-                    <input type="text" class="form-control form-control-lg border-0 bg-light" placeholder="Masukkan kode pos">
-                    <button class="btn btn-red px-4" type="button">Cari</button>
-                </div>
 
-=======
                 <div class="input-group mb-5 shadow-sm" style="max-width: 500px;">
                 <input type="text" id="input-kode-pos" class="form-control form-control-lg border-0 bg-light" placeholder="Masukkan kode pos">
                 <a href="lokasi.php" class="btn btn-red">Cari</a>
             </div>
->>>>>>> 47aefeb (inisialisasi project donor darah)
                 <div class="row text-center">
                     <div class="col-4 stat-box">
                         <h2>500+</h2>
@@ -123,15 +103,11 @@ session_start();
             <h3 class="fw-bold mb-5">Cara Kerjanya</h3>
             <div class="row">
                 <div class="col-md-4 mb-4">
-<<<<<<< HEAD
-                    <div class="icon-circle shadow-sm"><i class="bi bi-search"></i></div>
-                    <h5 class="fw-bold text-red">Temukan Lokasinya</h5>
-=======
+
                     <a href="#input-kode-pos" style="text-decoration: none;">
                         <div class="icon-circle shadow-sm"><i class="bi bi-search"></i></div>
                         <h5 class="fw-bold text-red">Temukan Lokasinya</h5>
                     </a>
->>>>>>> 47aefeb (inisialisasi project donor darah)
                     <p class="text-muted small">Cari pusat donor terdekat dengan memasukkan kode pos Anda</p>
                 </div>
                 <div class="col-md-4 mb-4">
