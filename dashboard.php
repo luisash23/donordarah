@@ -1,6 +1,16 @@
 <?php
 session_start();
 include 'config/app.php';
+
+$userName = null;
+if (isset($_SESSION['idUser'])) {
+    $idUser = intval($_SESSION['idUser']);
+    $userQuery = mysqli_query($db, "SELECT username FROM users WHERE idUser = '$idUser' LIMIT 1");
+    if ($userQuery && mysqli_num_rows($userQuery) > 0) {
+        $userRow = mysqli_fetch_assoc($userQuery);
+        $userName = $userRow['username'] ?? null;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +66,7 @@ include 'config/app.php';
         <a href="janjitemu.php" class="nav-link text-danger me-3">Janji Temu</a>
 
     <?php if (isset($_SESSION['idUser'])): ?>
-        <a href="profil-user.php" class="btn btn-outline-secondary">Profil Saya</a>
+        <a href="profil-user.php" class="btn btn-outline-secondary"><?= htmlspecialchars($userName ?: 'Saya') ?></a>
         <a href="logout.php" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin logout?');">Logout</a>
     
     <?php else: ?>
