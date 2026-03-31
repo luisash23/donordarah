@@ -1,3 +1,50 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+include 'config/app.php';
+
+$success = '';
+$error = '';
+
+if (isset($_POST['daftar'])) {
+    $username = mysqli_real_escape_string($db, $_POST['username']);
+    $gmail = mysqli_real_escape_string($db, $_POST['gmail']);
+    $nohp = mysqli_real_escape_string($db, $_POST['nohp']);
+    $tinggiBadan = mysqli_real_escape_string($db, $_POST['tinggiBadan']);
+    $beratBadan = mysqli_real_escape_string($db, $_POST['beratBadan']);
+    $golonganDarah = mysqli_real_escape_string($db, $_POST['golonganDarah']);
+    $password = mysqli_real_escape_string($db, $_POST['password']);
+    $confirm_password = mysqli_real_escape_string($db, $_POST['confirm_password']);
+
+    if (!$username || !$gmail || !$nohp || !$tinggiBadan || !$beratBadan || !$golonganDarah || !$password || !$confirm_password) {
+        $error = 'Semua bidang harus diisi.';
+    } elseif (!filter_var($gmail, FILTER_VALIDATE_EMAIL)) {
+        $error = 'Format email tidak valid.';
+    } elseif ($password !== $confirm_password) {
+        $error = 'Password dan konfirmasi password tidak cocok.';
+    } elseif (strlen($password) < 6) {
+        $error = 'Password minimal 6 karakter.';
+    } elseif ($beratBadan < 45) {
+        $error = 'Berat badan minimal 45 kg.';
+    } elseif ($tinggiBadan < 150) {
+        $error = 'Tinggi badan minimal 150 cm.';
+    } else {
+        $check = mysqli_query($db, "SELECT * FROM users WHERE gmail = '$gmail'");
+        if (mysqli_num_rows($check) > 0) {
+            $error = 'Email sudah digunakan.';
+        } else {
+            $query = "INSERT INTO users (username, gmail, nohp, tinggiBadan, beratBadan, golonganDarah, password) VALUES ('$username', '$gmail', '$nohp', '$tinggiBadan', '$beratBadan', '$golonganDarah', '$password')";
+
+            if (mysqli_query($db, $query)) {
+                $success = 'Registrasi berhasil. Silakan login.';
+            } else {
+                $error = 'Terjadi kesalahan: ' . mysqli_error($db);
+            }
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -107,47 +154,43 @@
                 <p class="text-muted">Daftar untuk mulai mendonorkan darah dan menyelamatkan nyawa</p>
             </div>
 
-            <form>
+            <form method="POST" action="" novalidate>
+                <?php if ($success): ?>
+                    <div class="alert alert-success py-2"><?= $success ?></div>
+                <?php endif; ?>
+                <?php if ($error): ?>
+                    <div class="alert alert-danger py-2"><?= $error ?></div>
+                <?php endif; ?>
+
                 <div class="section-header">
                     <i class="bi bi-person icon-red"></i> Data Pribadi
                 </div>
                 <div class="row g-3 mb-4">
                     <div class="col-md-6">
-                        <label class="form-label">Nama Depan *</label>
-                        <input type="text" class="form-control" placeholder="Nama Depan">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Nama Belakang *</label>
-                        <input type="text" class="form-control" placeholder="Nama Belakang">
+                        <label class="form-label">Nama Lengkap *</label>
+                        <input type="text" name="username" class="form-control" placeholder="Nama Lengkap" required>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Email *</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                            <input type="email" class="form-control" placeholder="Email">
+                            <input type="email" name="gmail" class="form-control" placeholder="Email" required>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Nomor Telepon *</label>
-                        <input type="tel" class="form-control" placeholder="Nomor Telepon">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Tanggal Lahir *</label>
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
-                            <input type="text" class="form-control" placeholder="dd/mm/yyyy">
-                        </div>
+                        <input type="tel" name="nohp" class="form-control" placeholder="Nomor Telepon" required>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Golongan Darah *</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-droplet"></i></span>
-                            <select class="form-select">
-                                <option selected>Pilih Golongan Darah</option>
-                                <option>A</option>
-                                <option>B</option>
-                                <option>AB</option>
-                                <option>O</option>
+                            <select class="form-select" name="golonganDarah" required>
+                                <option value="">Pilih Golongan Darah</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="AB">AB</option>
+                                <option value="O">O</option>
                             </select>
                         </div>
                     </div>
@@ -161,15 +204,15 @@
                         <label class="form-label">Berat Badan (kg) *</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-bag"></i></span>
-                            <input type="number" class="form-control" placeholder="Min. 45 kg">
+                            <input type="number" name="beratBadan" class="form-control" placeholder="Min. 45 kg" min="45" required>
                         </div>
                         <div class="helper-text">Minimal 45 kg untuk dapat mendonor</div>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Tinggi Badan*</label>
+                        <label class="form-label">Tinggi Badan *</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-person-arms-up"></i></span>
-                            <input type="number" class="form-control" placeholder="Tinggi Badan (cm)">
+                            <input type="number" name="tinggiBadan" class="form-control" placeholder="Tinggi Badan (cm)" min="150" required>
                         </div>
                         <div class="helper-text">Minimal 150 cm untuk dapat mendonor</div>
                     </div>
@@ -183,7 +226,7 @@
                         <label class="form-label">Password *</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                            <input type="password" class="form-control" placeholder="Password">
+                            <input type="password" name="password" class="form-control" placeholder="Password" required>
                         </div>
                         <div class="helper-text">Minimal 6 karakter</div>
                     </div>
@@ -191,13 +234,13 @@
                         <label class="form-label">Konfirmasi Password *</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                            <input type="password" class="form-control" placeholder="Konfirmasi Password">
+                            <input type="password" name="confirm_password" class="form-control" placeholder="Konfirmasi Password" required>
                         </div>
                     </div>
                 </div>
 
                 <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-danger">Daftar Sekarang</button>
+                    <button type="submit" name="daftar" class="btn btn-danger">Daftar Sekarang</button>
                 </div>
 
                 <div class="text-center mt-4">
