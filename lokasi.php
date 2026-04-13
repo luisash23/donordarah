@@ -1,5 +1,17 @@
 <?php
-session_start(); 
+session_start();
+include 'config/app.php';
+
+// Ambil data tempat donor dari database
+$tempatResult = mysqli_query($db, "SELECT * FROM tempat_donor ORDER BY idTempat ASC");
+if (!$tempatResult) {
+    die("Error mengambil data tempat: " . mysqli_error($db));
+}
+
+$tempatList = [];
+while ($row = mysqli_fetch_assoc($tempatResult)) {
+    $tempatList[] = $row;
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -86,36 +98,42 @@ session_start();
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     
-                    <div class="card location-card mb-4 shadow-sm">
-                        <div class="row g-4 align-items-center">
-                            <div class="col-md-4">
-                                <img src="assets/donor.jpg" class="img-placeholder" alt="UDD PMI">
-                            </div>
-                            <div class="col-md-8">
-                                <h4 class="fw-bold mb-1">Unit Donor Darah (UDD) PMI</h4>
-                                <div class="mb-3">
-                                    <span class="text-warning"><i class="bi bi-star-fill"></i> 4.7</span>
-                                </div>
-                                
-                                <div class="info-item">
-                                    <i class="bi bi-geo-alt text-danger"></i>
-                                    <span>Jl. Palang Merah Indonesia No. 1, Sidodadi Samarinda Ulu</span>
-                                </div>
-                                <div class="info-item">
-                                    <i class="i i-telephone text-danger"></i>
-                                    <span>+62 8890-4938-3129</span>
-                                </div>
-                                <div class="info-item mb-4">
-                                    <i class="bi bi-clock text-danger"></i>
-                                    <span>Sen-Jum: 08.00-18.00, Sab: 09.00-16.00</span>
-                                </div>
+                    <?php if (count($tempatList) > 0): ?>
+                        <?php foreach ($tempatList as $tempat): ?>
+                            <div class="card location-card mb-4 shadow-sm">
+                                <div class="row g-4 align-items-center">
+                                    <div class="col-md-4">
+                                        <img src="assets/donor.jpg" class="img-placeholder" alt="<?= $tempat['nama_tempat']; ?>">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h4 class="fw-bold mb-1"><?= $tempat['nama_tempat']; ?></h4>
+                                        <div class="mb-3">
+                                            <span class="text-warning"><i class="bi bi-star-fill"></i> 4.7</span>
+                                        </div>
+                                        
+                                        <div class="info-item">
+                                            <i class="bi bi-geo-alt text-danger"></i>
+                                            <span><?= $tempat['alamat']; ?></span>
+                                        </div>
+                                        <div class="info-item">
+                                            <i class="bi bi-telephone text-danger"></i>
+                                            <span>+62 8890-4938-3129</span>
+                                        </div>
+                                        <div class="info-item mb-4">
+                                            <i class="bi bi-clock text-danger"></i>
+                                            <span>Sen-Jum: 08.00-18.00, Sab: 09.00-16.00</span>
+                                        </div>
 
-                                <button class="btn btn-red px-4 py-2 fw-bold">
-                                    <a  href="fromjanjitemu.php" class="btn btn-red px-4 py-2 fw-bold">Buat Janji Temu</a>
-                                </button>
+                                        <a href="fromjanjitemu.php" class="btn btn-red px-4 py-2 fw-bold">Buat Janji Temu</a>
+                                    </div>
+                                </div>
                             </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="alert alert-warning text-center">
+                            <i class="bi bi-info-circle me-2"></i> Belum ada tempat donor yang tersedia. Silakan cek kembali nanti.
                         </div>
-                    </div>
+                    <?php endif; ?>
 
                     <div class="card location-card bg-light border-dashed" style="border: 2px dashed #ddd; opacity: 0.6;">
                         <div class="p-5 text-center text-muted">

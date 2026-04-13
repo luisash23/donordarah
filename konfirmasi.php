@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $waktuDonor = mysqli_real_escape_string($db, $_POST['waktuDonor'] ?? '');
 
     $kodeTiket = strtoupper(substr(md5(uniqid($idUser . time() . $tanggalDonor . $waktuDonor, true)), 0, 12));
-    $status = 'Terkonfirmasi';
+    $status = 'Pending';
 
     $query = "INSERT INTO konfirmasi_donor (idUser, kodeTiket, lokasiRS, tanggalDonor, waktuDonor, status) VALUES ('$idUser', '$kodeTiket', '$lokasiRS', '$tanggalDonor', '$waktuDonor', '$status')";
     if (mysqli_query($db, $query)) {

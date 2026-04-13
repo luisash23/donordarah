@@ -14,7 +14,6 @@ if ($idKonfirmasi <= 0 || $idUser <= 0) {
     header("Location: janjitemu.php?error=ID tidak valid");
     exit;
 }
-
 // Verifikasi bahwa janji milik user yang login
 $checkQuery = "SELECT idKonfirmasi FROM konfirmasi_donor WHERE idKonfirmasi = '$idKonfirmasi' AND idUser = '$idUser' LIMIT 1";
 $checkResult = mysqli_query($db, $checkQuery);

@@ -15,9 +15,15 @@ if (isset($_POST['masuk'])) {
         $data = mysqli_fetch_assoc($result);
         
         $_SESSION['login']  = true;
-        $_SESSION['idUser'] = $data['idUser']; 
+        $_SESSION['idUser'] = $data['idUser'];
+        $_SESSION['role']   = $data['role']; 
 
-        header("Location: dashboard.php");
+        // Redirect berdasarkan role
+        if ($data['role'] === 'ADMIN') {
+            header("Location: admindashboard.php");
+        } else {
+            header("Location: dashboard.php");
+        }
         exit;
     } else {
         $error = "Email atau Password salah!";

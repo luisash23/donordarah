@@ -34,7 +34,7 @@ CREATE TABLE `konfirmasi_donor` (
   `lokasiRS` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `tanggalDonor` date NOT NULL,
   `waktuDonor` time NOT NULL,
-  `status` varchar(20) COLLATE utf8mb4_general_ci DEFAULT 'Terkonfirmasi',
+  `status` varchar(20) COLLATE utf8mb4_general_ci DEFAULT 'Pending',
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -60,7 +60,8 @@ CREATE TABLE `users` (
   `tinggiBadan` int NOT NULL,
   `beratBadan` int NOT NULL,
   `golonganDarah` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `role` varchar(50) COLLATE utf8mb4_general_ci DEFAULT 'USER'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -73,6 +74,27 @@ INSERT INTO `users` (`idUser`, `username`, `gmail`, `nohp`, `tinggiBadan`, `bera
 (3, 'james oppa', 'james@gmail.com', '0', 170, 60, 'O', '123456'),
 (4, 'luis2', 'luis.spt@gmail.com', '85117011', 180, 80, 'B', 'luis20');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tempat_donor`
+--
+
+CREATE TABLE `tempat_donor` (
+  `idTempat` int NOT NULL,
+  `nama_tempat` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `alamat` text COLLATE utf8mb4_general_ci NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tempat_donor`
+--
+
+INSERT INTO `tempat_donor` (`idTempat`, `nama_tempat`, `alamat`, `createdAt`) VALUES
+(1, 'Bank Darah Rumah Sakit Pusat', 'Jl. Diponegoro No. 1, Jakarta Pusat', '2026-03-31 02:59:22'),
+(2, 'Kantor Palang Merah Indonesia', 'Jl. Gatot Subroto No. 40, Jakarta Pusat', '2026-03-31 03:00:00');
+
 --
 -- Indexes for dumped tables
 --
@@ -83,6 +105,12 @@ INSERT INTO `users` (`idUser`, `username`, `gmail`, `nohp`, `tinggiBadan`, `bera
 ALTER TABLE `konfirmasi_donor`
   ADD PRIMARY KEY (`idKonfirmasi`),
   ADD KEY `fk_user_konfirmasi` (`idUser`);
+
+--
+-- Indexes for table `tempat_donor`
+--
+ALTER TABLE `tempat_donor`
+  ADD PRIMARY KEY (`idTempat`);
 
 --
 -- Indexes for table `users`
@@ -99,6 +127,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `konfirmasi_donor`
   MODIFY `idKonfirmasi` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tempat_donor`
+--
+ALTER TABLE `tempat_donor`
+  MODIFY `idTempat` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -1,6 +1,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+session_start();
 include 'config/app.php';
 
 $success = '';
@@ -33,7 +34,7 @@ if (isset($_POST['daftar'])) {
         if (mysqli_num_rows($check) > 0) {
             $error = 'Email sudah digunakan.';
         } else {
-            $query = "INSERT INTO users (username, gmail, nohp, tinggiBadan, beratBadan, golonganDarah, password) VALUES ('$username', '$gmail', '$nohp', '$tinggiBadan', '$beratBadan', '$golonganDarah', '$password')";
+            $query = "INSERT INTO users (username, gmail, nohp, tinggiBadan, beratBadan, golonganDarah, password, role) VALUES ('$username', '$gmail', '$nohp', '$tinggiBadan', '$beratBadan', '$golonganDarah', '$password', 'USER')";
 
             if (mysqli_query($db, $query)) {
                 $success = 'Registrasi berhasil. Silakan login.';
